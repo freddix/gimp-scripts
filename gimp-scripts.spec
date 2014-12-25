@@ -1,18 +1,17 @@
 Summary:	Set of GIMP scripts
 Name:		gimp-scripts
-Version:	36
+Version:	41
 Release:	1
 License:	GPL/other
 Group:		Applications
 Source0:	http://www.gimphelp.org/DL/gimp_scripts-2.8.tar.bz2
-# Source0-md5:	47927587099502bd30610914ec735a0d
+# Source0-md5:	4d1444fb590271ff585a14340c1b2f65
 BuildRequires:	gimp-devel
 BuildArch:	noarch
 Requires:	gimp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		presetsdir	%(gimptool --gimpdatadir)/gimpressionist/Presets
-%define		scriptsdir	%(gimptool --gimpdatadir)/scripts
+%define		gimp_datadir	    %(gimptool --gimpdatadir)
 
 %description
 A set of verious and useful GIMP scripts.
@@ -24,16 +23,20 @@ A set of verious and useful GIMP scripts.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{presetsdir},%{scriptsdir}}
+install -d $RPM_BUILD_ROOT%{gimp_datadir}/{scripts,gimpressionist/Presets,gradients/PictureFrames,patterns}
 
-install *.scm $RPM_BUILD_ROOT%{scriptsdir}
-install Presets/*.txt $RPM_BUILD_ROOT%{presetsdir}
+install *.scm $RPM_BUILD_ROOT%{gimp_datadir}/scripts
+install gimpressionist/Presets/*.txt $RPM_BUILD_ROOT%{gimp_datadir}/gimpressionist/Presets
+install gradients/PictureFrames/*.ggr $RPM_BUILD_ROOT%{gimp_datadir}/gradients/PictureFrames
+install patterns/*.pat $RPM_BUILD_ROOT%{gimp_datadir}/patterns
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{scriptsdir}/*.scm
-%{presetsdir}/*.txt
+%{gimp_datadir}/gimpressionist/Presets/*.txt
+%{gimp_datadir}/gradients/PictureFrames
+%{gimp_datadir}/patterns/*.pat
+%{gimp_datadir}/scripts/*.scm
 
