@@ -1,7 +1,7 @@
 Summary:	Set of GIMP scripts
 Name:		gimp-scripts
 Version:	41
-Release:	1
+Release:	2
 License:	GPL/other
 Group:		Applications
 Source0:	http://www.gimphelp.org/DL/gimp_scripts-2.8.tar.bz2
@@ -11,7 +11,7 @@ BuildArch:	noarch
 Requires:	gimp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		gimp_datadir	    %(gimptool --gimpdatadir)
+%define		gimp_datadir	    %(gimptool-2.0 --gimpdatadir)
 
 %description
 A set of verious and useful GIMP scripts.
